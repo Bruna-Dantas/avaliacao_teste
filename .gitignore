@@ -1,0 +1,7 @@
+Atividade_Avaliativa_Unidade_1_Testes_de_Software.docx.pdf
+.coverage
+requirements.txt
+./.venv
+./.pytest_cache
+biblioteca/__pycache__
+tests/__pycache__
