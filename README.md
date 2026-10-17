@@ -12,10 +12,10 @@ Sistema de biblioteca em Python (cadastro, consulta, empréstimo e devolução d
 ```bash
 pip install pytest pytest-cov
 
-python -m pytest -v                                          # todos os testes (pytest + unittest)
-python -m pytest -v -s                                       # com prints
-python -m unittest tests.test_biblioteca_unittest -v         # somente unittest
-python -m pytest --cov=biblioteca --cov-report=term-missing  # cobertura
+python -m pytest -v                                         
+python -m pytest -v -s                                     
+python -m unittest tests.test_biblioteca_unittest -v         
+python -m pytest --cov=biblioteca --cov-report=term-missing
 ```
 
 ## 2. Estrutura do projeto
@@ -23,20 +23,20 @@ python -m pytest --cov=biblioteca --cov-report=term-missing  # cobertura
 ```
 biblioteca/
 ├── __init__.py
-├── livro.py          # entidade Livro
-├── biblioteca.py     # regras de negócio (cadastrar, consultar, emprestar, devolver)
-├── repository.py     # LivroRepository: persistência em SQLite
-├── validators.py     # validação dos dados do livro
-└── database.py       # conexão com o banco da aplicação
+├── livro.py        
+├── biblioteca.py     
+├── repository.py     
+├── validators.py     
+└── database.py      
 tests/
-├── test_livro.py                # Q2, Q4
-├── test_validadores.py          # Q4
-├── test_biblioteca.py           # Q2, Q5, Q6
-├── test_biblioteca_unittest.py  # Q3, Q5
-├── test_biblioteca_mock.py      # Q7, Q8
-├── test_repository.py           # Q11
-├── test_integracao.py           # Q9, Q10, Q12
-└── test_database.py             # Q14
+├── test_livro.py                
+├── test_validadores.py         
+├── test_biblioteca.py        
+├── test_biblioteca_unittest.py  
+├── test_biblioteca_mock.py     
+├── test_repository.py         
+├── test_integracao.py          
+└── test_database.py        
 ```
 
 ## 3. Resultado geral da execução
@@ -423,14 +423,3 @@ TOTAL    71 statements    0 miss    100%      (51 passed)
 | **Defeitos que pode achar** | Erro de lógica interna: não decrementar estoque, permitir empréstimo com estoque 0, exceção errada | Erros na **comunicação** entre componentes: SQL incorreto, dado não persistido, `atualizar` com `WHERE` errado, objeto reconstruído com campos trocados em `buscar` |
 
 Um teste unitário diz *onde* está o problema (rápido, determinístico, localizado). Um teste de integração diz *se as peças funcionam juntas* (mais lento e menos preciso para localizar a causa). Um bug de SQL no `repository.py` passaria despercebido nos testes com mock, mas seria pego nos de integração; já um bug de regra em `emprestar` é apontado de forma mais direta pelo teste unitário.
-
----
-
-## Pontos de atenção e possíveis melhorias
-
-- **`requirements.txt`:** o README original manda executar `pip install -r requirements.txt`, mas o arquivo está listado no `.gitignore` e não existe no repositório. Quem clonar o projeto não conseguirá seguir a instrução. Recomendo versionar o arquivo (`pytest` e `pytest-cov`).
-- **Devolução sem limite:** `devolver` sempre soma 1, mesmo que o livro já esteja com todos os exemplares; não há regra nem teste para isso.
-- **Tipo da quantidade:** `validar_quantidade` só compara `< 0`; `None` ou texto gerariam `TypeError`, não `ValueError`, e não há teste para isso.
-- **Integração com arquivo real:** `test_integracao_persistencia_apos_emprestimo` cria um segundo repositório sobre a **mesma conexão**. Reabrir um arquivo `.db` temporário (`tmp_path`) comprovaria a persistência de forma ainda mais forte.
-- **Rastreabilidade AAA:** apenas alguns testes trazem os comentários Arrange/Act/Assert; é suficiente para a Q2, mas padronizar ajudaria na leitura.
-- **Validadores de quantidade:** `test_validadores.py` não testa `validar_quantidade` diretamente (é coberta indiretamente por `test_livro.py`).
