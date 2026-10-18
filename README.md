@@ -1,8 +1,5 @@
 # Mini Sistema de Biblioteca — Testes de Software I (Unidade I)
 
-**Disciplina:** Testes de Software I · **Curso:** Ciência da Computação
-**Aluno(a):** _______________ · **Matrícula:** _______________ · **Data de entrega:** _______________
-
 Sistema de biblioteca em Python (cadastro, consulta, empréstimo e devolução de livros, com persistência em SQLite) acompanhado de uma suíte de testes progressiva: unitários → parametrizados → exceções → fixtures → mock/patch → integração → persistência → investigação de falhas → cobertura.
 
 ---
@@ -53,14 +50,14 @@ tests/
 
 | Arquivo de teste | Qtd. de testes | Status |
 |---|---|---|
-| `test_livro.py` | 10 (5 simples + 5 casos parametrizados) | ✅ todos passaram |
-| `test_validadores.py` | 13 (parametrizados) | ✅ todos passaram |
-| `test_biblioteca.py` | 10 | ✅ todos passaram |
-| `test_biblioteca_unittest.py` | 5 | ✅ todos passaram |
-| `test_biblioteca_mock.py` | 4 | ✅ todos passaram |
-| `test_repository.py` | 4 | ✅ todos passaram |
-| `test_integracao.py` | 4 | ✅ todos passaram |
-| `test_database.py` | 1 | ✅ passou |
+| `test_livro.py` | 10 (5 simples + 5 casos parametrizados) |  todos passaram |
+| `test_validadores.py` | 13 (parametrizados) | todos passaram |
+| `test_biblioteca.py` | 10 | todos passaram |
+| `test_biblioteca_unittest.py` | 5 | todos passaram |
+| `test_biblioteca_mock.py` | 4 | todos passaram |
+| `test_repository.py` | 4 | todos passaram |
+| `test_integracao.py` | 4 | todos passaram |
+| `test_database.py` | 1 | passou |
 
 ---
 
